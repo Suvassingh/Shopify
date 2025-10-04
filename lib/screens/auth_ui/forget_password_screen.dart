@@ -3,8 +3,6 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shopify/controllers/forget_password_controller.dart';
-
-import 'signup_screen.dart';
 import '../../utils/app_constants.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
