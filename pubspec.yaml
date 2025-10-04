@@ -49,7 +49,8 @@ dependencies:
   # Loading indicator
   flutter_easyloading: ^3.0.5
   firebase_messaging: ^15.2.10
-
+  carousel_slider: ^5.1.1
+  cached_network_image: ^3.4.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
