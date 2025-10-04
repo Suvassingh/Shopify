@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shopify/controllers/get_device_token.dart';
 import 'package:shopify/screens/user_pannel/main-screen.dart';
 import '../models/user-model.dart';
 
@@ -11,6 +12,7 @@ class GoogleSigninController extends GetxController {
   // ignore: unused_field
   final FirebaseAuth _auth = FirebaseAuth.instance;
   Future<void> signInWithGoogle() async {
+    final GetDeviceToken getDeviceToken = Get.put(GetDeviceToken());
     try {
       // ignore: unused_local_variable
       final GoogleSignInAccount? googleSignInAccount = await _googleSignIn
@@ -30,7 +32,7 @@ class GoogleSigninController extends GetxController {
           username: user.displayName.toString(), email: user.email.toString(), 
           phone: user.phoneNumber.toString(),
           userImg: user.photoURL.toString(), 
-          userDeviceToken: "",
+          userDeviceToken: getDeviceToken.deviceToken.toString(),
           country: "",
           userAddress: "",
           street: "", 
