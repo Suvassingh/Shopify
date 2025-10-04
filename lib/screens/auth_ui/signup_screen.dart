@@ -1,9 +1,17 @@
+<<<<<<< HEAD
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 import '../../controllers/signup_controlller.dart';
 import 'signin_screen.dart';
+=======
+import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
+import 'package:shopify/screens/auth_ui/signin_screen.dart';
+>>>>>>> 1e4db88fdb7272423e90a3ffcad881be9a8e1e67
 import '../../utils/app_constants.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -14,12 +22,15 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+<<<<<<< HEAD
   final SignupControlller signupControlller = Get.put(SignupControlller());
   TextEditingController username = TextEditingController();
   TextEditingController userEmail = TextEditingController();
   TextEditingController userPhone = TextEditingController();
   TextEditingController userCity = TextEditingController();
   TextEditingController userPassword = TextEditingController();
+=======
+>>>>>>> 1e4db88fdb7272423e90a3ffcad881be9a8e1e67
   @override
   Widget build(BuildContext context) {
     return KeyboardVisibilityBuilder(
@@ -55,14 +66,21 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                   SizedBox(height: Get.height / 20),
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> 1e4db88fdb7272423e90a3ffcad881be9a8e1e67
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 5),
                     width: Get.width,
                     child: Padding(
                       padding: const EdgeInsets.all(10),
                       child: TextFormField(
+<<<<<<< HEAD
                         controller: username,
+=======
+>>>>>>> 1e4db88fdb7272423e90a3ffcad881be9a8e1e67
                         cursorColor: AppConstants.appSecondaryColour,
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
@@ -76,7 +94,11 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ),
                   ),
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> 1e4db88fdb7272423e90a3ffcad881be9a8e1e67
                   SizedBox(height: Get.height / 500),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 5),
@@ -84,7 +106,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(10),
                       child: TextFormField(
+<<<<<<< HEAD
                         controller: userEmail,
+=======
+>>>>>>> 1e4db88fdb7272423e90a3ffcad881be9a8e1e67
                         cursorColor: AppConstants.appSecondaryColour,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
@@ -98,6 +123,11 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ),
                   ),
+<<<<<<< HEAD
+=======
+            
+
+>>>>>>> 1e4db88fdb7272423e90a3ffcad881be9a8e1e67
 
                   SizedBox(height: Get.height / 500),
                   Container(
@@ -106,8 +136,11 @@ class _SignupScreenState extends State<SignupScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(10),
                       child: TextFormField(
+<<<<<<< HEAD
                         controller: userPhone,
 
+=======
+>>>>>>> 1e4db88fdb7272423e90a3ffcad881be9a8e1e67
                         cursorColor: AppConstants.appSecondaryColour,
                         keyboardType: TextInputType.phone,
                         decoration: InputDecoration(
@@ -121,20 +154,34 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ),
                   ),
+<<<<<<< HEAD
 
                   SizedBox(height: Get.height / 500),
+=======
+            
+
+
+SizedBox(height: Get.height / 500),
+>>>>>>> 1e4db88fdb7272423e90a3ffcad881be9a8e1e67
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 5),
                     width: Get.width,
                     child: Padding(
                       padding: const EdgeInsets.all(10),
                       child: TextFormField(
+<<<<<<< HEAD
                         controller: userCity,
+=======
+>>>>>>> 1e4db88fdb7272423e90a3ffcad881be9a8e1e67
                         cursorColor: AppConstants.appSecondaryColour,
                         keyboardType: TextInputType.streetAddress,
                         decoration: InputDecoration(
                           hintText: "City",
+<<<<<<< HEAD
                           prefixIcon: Icon(Icons.location_pin),
+=======
+                          prefixIcon: Icon(Icons.location_pin ),
+>>>>>>> 1e4db88fdb7272423e90a3ffcad881be9a8e1e67
                           contentPadding: EdgeInsets.only(top: 2, left: 8),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -144,12 +191,20 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
 
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> 1e4db88fdb7272423e90a3ffcad881be9a8e1e67
                   SizedBox(height: Get.height / 500),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 5),
                     width: Get.width,
                     child: Padding(
                       padding: const EdgeInsets.all(10),
+<<<<<<< HEAD
                       child: Obx(
                         () => TextFormField(
                           controller: userPassword,
@@ -172,6 +227,18 @@ class _SignupScreenState extends State<SignupScreen> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
+=======
+                      child: TextFormField(
+                        cursorColor: AppConstants.appSecondaryColour,
+                        keyboardType: TextInputType.visiblePassword,
+                        decoration: InputDecoration(
+                          suffixIcon: Icon(Icons.visibility_off),
+                          hintText: "Password",
+                          prefixIcon: Icon(Icons.password),
+                          contentPadding: EdgeInsets.only(top: 2, left: 8),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+>>>>>>> 1e4db88fdb7272423e90a3ffcad881be9a8e1e67
                           ),
                         ),
                       ),
@@ -187,6 +254,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: TextButton(
+<<<<<<< HEAD
                         onPressed: () async {
                           String name = username.text.trim();
                           String email = userEmail.text.trim();
@@ -230,6 +298,9 @@ class _SignupScreenState extends State<SignupScreen> {
                             }
                           }
                         },
+=======
+                        onPressed: () {},
+>>>>>>> 1e4db88fdb7272423e90a3ffcad881be9a8e1e67
                         child: Text(
                           "Sign Up",
                           style: TextStyle(
@@ -244,7 +315,11 @@ class _SignupScreenState extends State<SignupScreen> {
                   SizedBox(height: Get.height / 50),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> 1e4db88fdb7272423e90a3ffcad881be9a8e1e67
                     children: [
                       Text(
                         "Already have an account?",

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+<<<<<<< HEAD
 import '../../screens/auth_ui/signin_screen.dart';
 import '../../controllers/google_signin_controller.dart';
 import '../../utils/app_constants.dart';
@@ -8,6 +9,12 @@ import '../../utils/app_constants.dart';
 class WelcomeScreen extends StatelessWidget {
    WelcomeScreen({super.key});
   final GoogleSigninController _googleSigninController = Get.put(GoogleSigninController());
+=======
+import '../../utils/app_constants.dart';
+
+class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen({super.key});
+>>>>>>> 1e4db88fdb7272423e90a3ffcad881be9a8e1e67
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +59,13 @@ class WelcomeScreen extends StatelessWidget {
                     height: 24,
                     width: 24,
                   ),
+<<<<<<< HEAD
                   onPressed: () {
                     _googleSigninController.signInWithGoogle();
                   },
+=======
+                  onPressed: () {},
+>>>>>>> 1e4db88fdb7272423e90a3ffcad881be9a8e1e67
                   label: Text(
                     "Sign in with google",
                     style: TextStyle(
@@ -81,9 +92,13 @@ class WelcomeScreen extends StatelessWidget {
                     height: 24,
                     width: 24,
                   ),
+<<<<<<< HEAD
                   onPressed: () {
                     Get.to(()=>SigninScreen());
                   },
+=======
+                  onPressed: () {},
+>>>>>>> 1e4db88fdb7272423e90a3ffcad881be9a8e1e67
                   label: Text(
                     "Sign in with email",
                     style: TextStyle(
