@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:shopify/utils/app_constants.dart';
 import 'package:shopify/widgets/banner_widget.dart';
 import 'package:shopify/widgets/custom_drawer_widget.dart';
+import 'package:shopify/widgets/heading_widget.dart';
+
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -28,9 +30,14 @@ class MainScreen extends StatelessWidget {
           children: [
             SizedBox(height: Get.height/90,),
           //  banners
-          BannerWidget()
-
-
+          BannerWidget(),
+          // heading_widget
+          HeadingWidget(
+            headingTitle: "Categories",
+            headingSubTitle: "Low budget",
+            onTap: (){},
+            buttonText: "See more >",
+          ),
           ],
         ),
       ),
