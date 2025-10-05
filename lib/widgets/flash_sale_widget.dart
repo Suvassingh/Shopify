@@ -10,6 +10,8 @@ import 'package:shopify/models/product_model.dart';
 
 import 'package:shopify/utils/app_constants.dart';
 
+import '../screens/user_pannel/product_details_screen.dart';
+
 
 class FlashSaleWidget extends StatelessWidget {
   const FlashSaleWidget({super.key});
@@ -60,7 +62,7 @@ class FlashSaleWidget extends StatelessWidget {
                 return Row(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: ()=>Get.to(()=>ProductDetailsScreen(productModel:productModel)),
                       child: Padding(
                         padding: EdgeInsets.all(5.0),
                         child: Container(

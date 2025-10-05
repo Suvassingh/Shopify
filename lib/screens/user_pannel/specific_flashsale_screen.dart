@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:image_card/image_card.dart';
 
 import 'package:shopify/models/product_model.dart';
+import 'package:shopify/screens/user_pannel/product_details_screen.dart';
 import 'package:shopify/utils/app_constants.dart';
 
 class SpecificFlashsaleScreen extends StatefulWidget {
@@ -79,7 +80,9 @@ class _SpecificFlashsaleScreenState extends State<SpecificFlashsaleScreen> {
                 return Row(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () => Get.to(
+                        () => ProductDetailsScreen(productModel: productModel),
+                      ),
                       child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Container(

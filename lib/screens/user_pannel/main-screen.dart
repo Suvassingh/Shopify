@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopify/screens/user_pannel/all_categories_screen.dart';
+import 'package:shopify/screens/user_pannel/all_product_screen.dart';
 import 'package:shopify/screens/user_pannel/specific_flashsale_screen.dart';
 import 'package:shopify/utils/app_constants.dart';
 import 'package:shopify/widgets/all_product_widget.dart';
@@ -56,7 +57,7 @@ class MainScreen extends StatelessWidget {
               HeadingWidget(
                 headingTitle: "All Products",
                 headingSubTitle: "According to your  budget",
-                onTap: () {},
+                onTap: () => Get.to(() => AllProductScreen()),
                 buttonText: "See More >",
               ),
               AllProductWidget(),

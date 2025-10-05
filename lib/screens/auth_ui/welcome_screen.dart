@@ -62,25 +62,27 @@ class WelcomeScreen extends StatelessWidget {
           ),
           SizedBox(height: Get.height / 70),
           // Email Sign-In Button
-          Container(
-            width: Get.width / 1.2,
-            height: Get.height / 13,
-            decoration: BoxDecoration(
-              color: AppConstants.appSecondaryColour,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: TextButton.icon(
-              icon: Image.asset(
-                'assets/images/email.png',
-                height: 24,
-                width: 24,
+          Material(
+            child: Container(
+              width: Get.width / 1.2,
+              height: Get.height / 13,
+              decoration: BoxDecoration(
+                color: AppConstants.appSecondaryColour,
+                borderRadius: BorderRadius.circular(20),
               ),
-              onPressed: () {
-                Get.to(() => SigninScreen());
-              },
-              label: Text(
-                "Sign in with Email",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              child: TextButton.icon(
+                icon: Image.asset(
+                  'assets/images/email.png',
+                  height: 24,
+                  width: 24,
+                ),
+                onPressed: () {
+                  Get.to(() => SigninScreen());
+                },
+                label: Text(
+                  "Sign in with Email",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
               ),
             ),
           ),

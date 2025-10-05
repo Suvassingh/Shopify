@@ -1,22 +1,28 @@
-
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_card/image_card.dart';
 import 'package:shopify/models/product_model.dart';
+import 'package:shopify/screens/user_pannel/product_details_screen.dart';
+import 'package:shopify/utils/app_constants.dart';
 
-import '../screens/user_pannel/product_details_screen.dart';
-
-
-class AllProductWidget extends StatelessWidget {
-  const AllProductWidget({super.key});
+class AllProductScreen extends StatelessWidget {
+  const AllProductScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("All Products",style: TextStyle(color: AppConstants.appTextColour,fontWeight: FontWeight.bold),),
+        centerTitle: true,
+        iconTheme: IconThemeData(color: AppConstants.appTextColour),
+        backgroundColor: AppConstants.appMainColour,
+
+      ),
+      body:FutureBuilder(
       future: FirebaseFirestore.instance
           .collection('products')
           .where('isSale', isEqualTo: false)
@@ -67,9 +73,7 @@ class AllProductWidget extends StatelessWidget {
               return Row(
                 children: [
                   GestureDetector(
-                    onTap: () => Get.to(
-                      () => ProductDetailsScreen(productModel: productModel),
-                    ),
+                    onTap: ()=>Get.to(()=>ProductDetailsScreen(productModel:productModel)),
                     child: Padding(
                       padding: EdgeInsets.all(8.0),
                       // ignore: avoid_unnecessary_containers
@@ -88,10 +92,11 @@ class AllProductWidget extends StatelessWidget {
                               style: TextStyle(fontSize: 12),
                             ),
                           ),
-                          footer: 
+                          footer:
                               // ignore: prefer_interpolation_to_compose_strings
-                              Center(child: Text("Rs "+productModel.fullPrice))
-                           
+                              Center(
+                                child: Text("Rs " + productModel.fullPrice),
+                              ),
                         ),
                       ),
                     ),
@@ -104,6 +109,8 @@ class AllProductWidget extends StatelessWidget {
 
         return Container();
       },
+    ),
     );
+
   }
 }
