@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_card/image_card.dart';
 import 'package:shopify/models/product_model.dart';
+import 'package:shopify/screens/user_pannel/specific_flashsale_screen.dart';
 import 'package:shopify/utils/app_constants.dart';
 
 
@@ -55,13 +56,7 @@ class FlashSaleWidget extends StatelessWidget {
                   createdAt: productData['createdAt'],
                   updatedAt:productData['updatedAt'] ,
                 );
-                // CategoriesModel categoriesModel = CategoriesModel(
-                //   categoryId: snapshot.data!.docs[index]['categoryId'],
-                //   categoryImg: snapshot.data!.docs[index]['categoryImg'],
-                //   categoryName: snapshot.data!.docs[index]['categoryName'],
-                //   createdAt: snapshot.data!.docs[index]['createdAt'],
-                //   updatedAt: snapshot.data!.docs[index]['updatedAt'],
-                // );
+              
                 return Row(
                   children: [
                     GestureDetector(
