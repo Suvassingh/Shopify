@@ -52,6 +52,12 @@ class MainScreen extends StatelessWidget {
                 buttonText: "See More >",
               ),
               FlashSaleWidget(),
+              HeadingWidget(
+                headingTitle: "All Products",
+                headingSubTitle: "According to your  budget",
+                onTap: () {},
+                buttonText: "See More >",
+              ),
           ],
         ),
       ),

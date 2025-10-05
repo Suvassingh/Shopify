@@ -7,8 +7,9 @@ import 'package:image_card/image_card.dart';
 import 'package:shopify/models/product_model.dart';
 import 'package:shopify/utils/app_constants.dart';
 
-import '../../models/categories_model.dart';
 
+
+// ignore: must_be_immutable
 class SpecificCategoryProductScreen extends StatefulWidget {
   String categoryId;
   String categoryName;

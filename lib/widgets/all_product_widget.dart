@@ -10,14 +10,16 @@ import 'package:shopify/models/product_model.dart';
 
 import 'package:shopify/utils/app_constants.dart';
 
-
 class FlashSaleWidget extends StatelessWidget {
   const FlashSaleWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: FirebaseFirestore.instance.collection('products').where('isSale',isEqualTo: true).get(),
+      future: FirebaseFirestore.instance
+          .collection('products')
+          .where('isSale', isEqualTo: true)
+          .get(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
           return Center(child: Text("Error"));
@@ -54,9 +56,9 @@ class FlashSaleWidget extends StatelessWidget {
                   isSale: productData['isSale'],
                   productDescription: productData['productDescription'],
                   createdAt: productData['createdAt'],
-                  updatedAt:productData['updatedAt'] ,
+                  updatedAt: productData['updatedAt'],
                 );
-              
+
                 return Row(
                   children: [
                     GestureDetector(
@@ -78,18 +80,24 @@ class FlashSaleWidget extends StatelessWidget {
                                 style: TextStyle(fontSize: 12),
                               ),
                             ),
-                            footer:Row(children: [
-                              Text("Rs ${productModel.salePrice}",
-                              style: TextStyle(fontSize: 10),
-                              ),
-                              SizedBox(width: 4,),
-                              // ignore: unnecessary_string_interpolations
-                              Text("${productModel.fullPrice}",
-                              style: TextStyle(fontSize: 10,
-                              decoration: TextDecoration.lineThrough,
-                              color: AppConstants.appSecondaryColour),
-                              )
-                            ],),
+                            footer: Row(
+                              children: [
+                                Text(
+                                  "Rs ${productModel.salePrice}",
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                                SizedBox(width: 4),
+                                // ignore: unnecessary_string_interpolations
+                                Text(
+                                  "${productModel.fullPrice}",
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    decoration: TextDecoration.lineThrough,
+                                    color: AppConstants.appSecondaryColour,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
