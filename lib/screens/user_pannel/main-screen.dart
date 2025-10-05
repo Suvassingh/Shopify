@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shopify/screens/user_pannel/all_categories_screen.dart';
 import 'package:shopify/utils/app_constants.dart';
 import 'package:shopify/widgets/banner_widget.dart';
+import 'package:shopify/widgets/category_widget.dart';
 import 'package:shopify/widgets/custom_drawer_widget.dart';
+import 'package:shopify/widgets/flash_sale_widget.dart';
 import 'package:shopify/widgets/heading_widget.dart';
 
 
@@ -23,6 +26,7 @@ class MainScreen extends StatelessWidget {
       drawer: CustomDrawerWidget(),
      body: SingleChildScrollView(
       physics: BouncingScrollPhysics(),
+      // ignore: avoid_unnecessary_containers
       child: Container(
         
         child: Column(
@@ -34,10 +38,19 @@ class MainScreen extends StatelessWidget {
           // heading_widget
           HeadingWidget(
             headingTitle: "Categories",
-            headingSubTitle: "Low budget",
-            onTap: (){},
-            buttonText: "See more >",
+            headingSubTitle: "According to your  budget",
+            onTap: ()=> Get.to(AllCategoriesScreen()),
+            buttonText: "See More >",
           ),
+        
+        CategoriesWidget(),
+         HeadingWidget(
+                headingTitle: "Flash Sale",
+                headingSubTitle: "According to your  budget",
+                onTap: () {},
+                buttonText: "See More >",
+              ),
+              FlashSaleWidget(),
           ],
         ),
       ),
