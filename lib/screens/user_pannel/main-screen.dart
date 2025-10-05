@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:shopify/screens/user_pannel/all_categories_screen.dart';
 import 'package:shopify/screens/user_pannel/specific_flashsale_screen.dart';
 import 'package:shopify/utils/app_constants.dart';
+import 'package:shopify/widgets/all_product_widget.dart';
 import 'package:shopify/widgets/banner_widget.dart';
 import 'package:shopify/widgets/category_widget.dart';
 import 'package:shopify/widgets/custom_drawer_widget.dart';
@@ -58,6 +59,7 @@ class MainScreen extends StatelessWidget {
                 onTap: () {},
                 buttonText: "See More >",
               ),
+              AllProductWidget(),
           ],
         ),
       ),
