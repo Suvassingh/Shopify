@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shopify/screens/user_pannel/all_orders_screen.dart';
 import 'package:shopify/utils/app_constants.dart';
 
 import '../screens/auth_ui/welcome_screen.dart';
@@ -107,6 +108,10 @@ class _CustomDrawerWidgetState extends State<CustomDrawerWidget> {
                   Icons.arrow_forward,
                   color: AppConstants.appTextColour,
                 ),
+                onTap: (){
+                  Get.back();
+                  Get.to(()=>AllOrdersScreen());
+                  },
               ),
             ),
             Padding(

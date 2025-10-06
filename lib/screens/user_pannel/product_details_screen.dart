@@ -6,11 +6,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:shopify/controllers/rating_controller.dart';
 import 'package:shopify/models/cart_model.dart';
 import 'package:shopify/models/product_model.dart';
+import 'package:shopify/models/review_model.dart';
 import 'package:shopify/screens/user_pannel/cart_screen.dart';
 import 'package:shopify/utils/app_constants.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
 class ProductDetailsScreen extends StatefulWidget {
@@ -23,8 +27,13 @@ class ProductDetailsScreen extends StatefulWidget {
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   User? user = FirebaseAuth.instance.currentUser;
+  
   @override
+  
   Widget build(BuildContext context) {
+    CalculateProductRatingController calculateProductRatingController = Get.put(
+      CalculateProductRatingController(widget.productModel.productId),
+    );
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -116,6 +125,34 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           ),
                         ),
                       ),
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          alignment: Alignment.topLeft,
+                          child: RatingBar.builder(
+                            glow: false,
+                            ignoreGestures: true,
+                            initialRating: double.parse(
+                              calculateProductRatingController.averageRating
+                                  .toString(),
+                            ),
+                            minRating: 1,
+                            direction: Axis.horizontal,
+                            allowHalfRating: true,
+                            itemCount: 5,
+                            itemSize: 25,
+                            itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
+                            itemBuilder: (context, _) =>
+                                Icon(Icons.star, color: Colors.amber),
+                            onRatingUpdate: (value) {},
+                          ),
+                        ),
+                        Text(
+                          calculateProductRatingController.averageRating
+                              .toString(),
+                        ),
+                      ],
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -211,6 +248,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 ),
                                 onPressed: () {
                                   // Get.to(() => SigninScreen());
+                                  sendMessangeOnwhatsapp(
+                                    productModel:widget.productModel,
+                                  );
                                 },
                                 label: Text(
                                   "WhatsApp",
@@ -230,11 +270,87 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 ),
               ),
             ),
-          ],
+            // review
+            FutureBuilder(
+              future: FirebaseFirestore.instance
+                  .collection('products')
+                  .doc(widget.productModel.productId)
+                  .collection('reviews')
+                  .get(),
+              builder:
+                  (
+                    BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot,
+                  ) {
+                    if (snapshot.hasError) {
+                      return Center(child: Text("Error"));
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Container(
+                        height: Get.height / 5,
+                        child: Center(child: CupertinoActivityIndicator()),
+                      );
+                    }
+
+                    if (snapshot.data!.docs.isEmpty) {
+                      return Center(child: Text("No reviews found!"));
+                    }
+
+                    if (snapshot.data != null) {
+                      return ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          var data = snapshot.data!.docs[index];
+                          ReviewModel reviewModel = ReviewModel(
+                            customerName: data['customerName'],
+                            customerPhone: data['customerPhone'],
+                            customerDeviceToken: data['customerDeviceToken'],
+                            customerId: data['customerId'],
+                            feedback: data['feedback'],
+                            rating: data['rating'],
+                            createdAt: data['createdAt'],
+                          );
+                          return Card(
+                            elevation: 5,
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                child: Text(reviewModel.customerName[0]),
+                              ),
+                              title: Text(reviewModel.customerName),
+                              subtitle: Text(reviewModel.feedback),
+                              trailing: Text(reviewModel.rating),
+                            ),
+                          );
+                        },
+                      );
+                    }
+
+                    return Container();
+                  },
+            ),          ],
         ),
       ),
     );
   }
+
+static Future<void> sendMessangeOnwhatsapp({required ProductModel productModel})async{
+  final number = "+9779811769701";
+  final message = "Hello from suvas \n i want to know about the product \n ${productModel.productName} ${productModel.productId} ";
+
+
+  final url = 'https://wa.me/$number?text=${Uri.encodeComponent(message)}';
+
+if(await canLaunch(url)){
+  await launch(url);
+}
+else{
+  throw'Could not launch $url';
+}
+
+}
+
 
   // Check product exist or not
   Future<void> checkProductExistance({
