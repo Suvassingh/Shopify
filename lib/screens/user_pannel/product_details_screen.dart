@@ -97,6 +97,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             Text(
                               "Product Name : " +
                                   widget.productModel.productName,
+                                  style: TextStyle(fontSize: 16,),
                             ),
                             Icon(Icons.favorite_outline),
                           ],
@@ -110,6 +111,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         alignment: Alignment.topLeft,
                         child: Text(
                           "Category Name : " + widget.productModel.categoryName,
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
                         ),
                       ),
                     ),
@@ -121,8 +125,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           children: [
                             widget.productModel.isSale == true &&
                                     widget.productModel.salePrice != ""
-                                ? Text("Rs " + widget.productModel.salePrice)
-                                : Text("Rs " + widget.productModel.fullPrice),
+                                ? Text("Rs : " + widget.productModel.salePrice,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                    ),
+                                  )
+                                : Text("Rs : " + widget.productModel.fullPrice,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                    ),
+                                  ),
                           ],
                         ),
                       ),
@@ -131,7 +143,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         alignment: Alignment.topLeft,
-                        child: Text(widget.productModel.productDescription),
+                        child: Text(widget.productModel.productDescription,
+                          style: TextStyle(
+                            fontSize: 16,
+                            
+                          ),
+                          textAlign: TextAlign.justify,
+                        ),
                       ),
                     ),
                     Padding(
@@ -155,8 +173,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   width: 30,
                                 ),
                                 onPressed: () async {
-                                  // Get.to(() => SigninScreen());
                                   checkProductExistance(uId: user!.uid);
+                                  Get.snackbar(
+                                    "Added to cart",
+                                    'Product added to cart successfully',
+                                    snackPosition: SnackPosition.TOP,
+                                    colorText: AppConstants.appTextColour,
+                                    backgroundColor:
+                                        AppConstants.appSecondaryColour,
+                                  );
                                 },
                                 label: Text(
                                   "Add to cart",
