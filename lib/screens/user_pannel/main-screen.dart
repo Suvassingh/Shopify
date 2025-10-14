@@ -30,6 +30,8 @@ class _MainScreenState extends State<MainScreen> {
     notificationService.requestNotificationPermission();
     notificationService.getDeviceToken();
     FcmService.firebaseInit();
+    notificationService.firebaseInit(context);
+    notificationService.setupInteractMessage(context);
   }
   @override
   Widget build(BuildContext context) {
