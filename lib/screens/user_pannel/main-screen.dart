@@ -4,6 +4,8 @@ import 'package:shopify/screens/user_pannel/all_categories_screen.dart';
 import 'package:shopify/screens/user_pannel/all_product_screen.dart';
 import 'package:shopify/screens/user_pannel/cart_screen.dart';
 import 'package:shopify/screens/user_pannel/specific_flashsale_screen.dart';
+import 'package:shopify/services/fcm_service.dart';
+import 'package:shopify/services/notification_service.dart';
 import 'package:shopify/utils/app_constants.dart';
 import 'package:shopify/widgets/all_product_widget.dart';
 import 'package:shopify/widgets/banner_widget.dart';
@@ -13,9 +15,22 @@ import 'package:shopify/widgets/flash_sale_widget.dart';
 import 'package:shopify/widgets/heading_widget.dart';
 
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  NotificationService notificationService = NotificationService();
+  @override
+  void initState(){
+    super.initState();
+    notificationService.requestNotificationPermission();
+    notificationService.getDeviceToken();
+    FcmService.firebaseInit();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:shopify/controllers/get_device_token.dart';
+
 import 'package:shopify/utils/app_constants.dart';
 import '../models/user-model.dart';
 
@@ -24,7 +24,7 @@ class SignupControlller extends GetxController {
     String userPassword,
     String userDeviceToken,
   ) async {
-    final GetDeviceToken getDeviceToken = Get.put(GetDeviceToken());
+    // final GetDeviceToken getDeviceToken = Get.put(GetDeviceToken());
     try {
       EasyLoading.show(status: "please wait...");
       UserCredential userCredential = await _auth
@@ -42,7 +42,7 @@ class SignupControlller extends GetxController {
         email: userEmail,
         phone: userPhone,
         userImg: "",
-        userDeviceToken: getDeviceToken.deviceToken.toString(),
+        userDeviceToken: userDeviceToken,
         country: "",
         userAddress: "",
         street: "",

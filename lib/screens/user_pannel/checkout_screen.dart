@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:shopify/controllers/cart_price_controller.dart';
 import 'package:shopify/controllers/get_customer_device_token_controller.dart';
 import 'package:shopify/models/cart_model.dart';
+import 'package:shopify/services/get_service_key.dart';
 import 'package:shopify/services/place_order_service.dart';
 import 'package:shopify/utils/app_constants.dart';
 
@@ -168,9 +169,13 @@ TextEditingController addressController = TextEditingController();
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: TextButton(
-                    onPressed: () {
+                    onPressed: ()async {
                       // Get.to(() => SigninScreen());
-                      showCustomBottomSheet();
+                      // showCustomBottomSheet();
+                      GetServerKey getServerKey = GetServerKey();
+                      String accessToken =await  getServerKey.getServerKeyToken();
+                      print(accessToken );
+
                     },
                     child: Text(
                       "Confirm Order",

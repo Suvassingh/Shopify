@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'Shopify',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
 
@@ -33,4 +33,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
+          

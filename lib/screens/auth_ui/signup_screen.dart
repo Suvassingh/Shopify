@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
+import 'package:shopify/services/notification_service.dart';
 import '../../controllers/signup_controlller.dart';
 import 'signin_screen.dart';
 import '../../utils/app_constants.dart';
@@ -108,12 +109,13 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                     child: TextButton(
                       onPressed: () async {
+                        NotificationService notificationService = NotificationService();
                         String name = username.text.trim();
                         String email = userEmail.text.trim();
                         String phone = userPhone.text.trim();
                         String city = userCity.text.trim();
                         String password = userPassword.text.trim();
-                        String userDeviceToken = "";
+                        String userDeviceToken =await notificationService.getDeviceToken();
 
                         if (name.isEmpty ||
                             email.isEmpty ||
