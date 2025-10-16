@@ -186,16 +186,22 @@ class NotificationService {
     print(
       "Navigating to appointments screen. Hit here to handle the message. Message data: ${message.data}",
     );
-    if (message.data["screen"] == "cart") {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => CartScreen()),
-      );
-    } else {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => NotificationScreen()),
-      );
-    }
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => NotificationScreen(message: message),
+      ),
+    );
+    // if (message.data["screen"] == "cart") {
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(builder: (context) => CartScreen()),
+    //   );
+    // } else {
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(builder: (context) => NotificationScreen(message:message)),
+    //   );
+    // }
   }
 }
