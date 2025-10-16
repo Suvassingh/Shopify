@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+
 import 'package:get/get.dart';
+import 'package:shopify/controllers/notification_controller.dart';
 import 'package:shopify/screens/user_pannel/all_categories_screen.dart';
 import 'package:shopify/screens/user_pannel/all_product_screen.dart';
 import 'package:shopify/screens/user_pannel/cart_screen.dart';
@@ -8,7 +9,7 @@ import 'package:shopify/screens/user_pannel/specific_flashsale_screen.dart';
 import 'package:shopify/services/fcm_service.dart';
 import 'package:shopify/services/notification_screen.dart';
 import 'package:shopify/services/notification_service.dart';
-import 'package:shopify/services/send_notification_service.dart';
+
 import 'package:shopify/utils/app_constants.dart';
 import 'package:shopify/widgets/all_product_widget.dart';
 import 'package:shopify/widgets/banner_widget.dart';
@@ -16,6 +17,7 @@ import 'package:shopify/widgets/category_widget.dart';
 import 'package:shopify/widgets/custom_drawer_widget.dart';
 import 'package:shopify/widgets/flash_sale_widget.dart';
 import 'package:shopify/widgets/heading_widget.dart';
+import 'package:badges/badges.dart' as badges;
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -26,6 +28,9 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   NotificationService notificationService = NotificationService();
+  final NotificationController notificationController = Get.put(
+    NotificationController(),
+  );
   @override
   void initState() {
     super.initState();
@@ -52,21 +57,28 @@ class _MainScreenState extends State<MainScreen> {
         centerTitle: true,
         elevation: 0,
         actions: [
-          GestureDetector(
-            onTap: () {
-              Get.to(() => NotificationScreen());
-            },
-            child: Icon(Icons.notifications),
-          ),
+          // GestureDetector(
+          //   onTap: () {
+          //     Get.to(() => NotificationScreen());
+          //   },
+          // ),
+          Obx(() {
+            return badges.Badge(
+              badgeContent: Text(
+                "${notificationController.notifictionCount.value}",
+                style: TextStyle(color: Colors.white),
+              ),
+              showBadge: notificationController.notifictionCount.value > 0,
+              position: badges.BadgePosition.topEnd(top: 0, end: 3),
+              child: IconButton(
+                icon: Icon(Icons.notifications),
+                onPressed: () => Get.to(() => NotificationScreen()),
+              ),
+            );
+          }),
           GestureDetector(
             onTap: () => Get.to(() => CartScreen()),
-            // onTap: ()async{
-            //   EasyLoading.show(status: "Sending Notification");
-            //  await SendNotificationService.sendNotificationUsingApi(token: "cl3IwP9cTkCSHk31yOgVYJ:APA91bEG5VW7eVxEP5XDxyfDcheuiQPfa0EOZBggf-0fHDj9091iAO4KeTIF8F0j3TY8Jy4lWc8M53zmxbfC-EQG6XfccKp2ArFZpaUCNOqZ1cqG-4nZa7E", title: "notofication title", body: "notofication body", data: {
-            //   "Screen":"cart"
-            //  });
-            //  EasyLoading.dismiss();
-            // },
+
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Icon(Icons.shopping_cart),
