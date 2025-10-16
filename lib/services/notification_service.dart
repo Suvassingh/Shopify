@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:shopify/screens/user_pannel/cart_screen.dart';
 import 'package:shopify/screens/user_pannel/main-screen.dart';
+import 'package:shopify/services/notification_screen.dart';
 
 class NotificationService {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
@@ -184,12 +186,16 @@ class NotificationService {
     print(
       "Navigating to appointments screen. Hit here to handle the message. Message data: ${message.data}",
     );
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => MainScreen(),
-      ),
-    );
+    if (message.data["screen"] == "cart") {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => CartScreen()),
+      );
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => NotificationScreen()),
+      );
+    }
   }
 }
