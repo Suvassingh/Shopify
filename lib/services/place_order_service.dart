@@ -3,9 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:shopify/models/cart_model.dart';
 import 'package:shopify/models/order_model.dart';
 import 'package:shopify/screens/user_pannel/main-screen.dart';
 import 'package:shopify/services/generate_order_id_service.dart';
+import 'package:shopify/services/notification_service.dart';
+import 'package:shopify/services/send_notification_service.dart';
 import 'package:shopify/utils/app_constants.dart';
 
 void placeOrder({
@@ -16,6 +19,7 @@ void placeOrder({
   required String customerDeviceToken,
 }) async {
   final user = FirebaseAuth.instance.currentUser;
+  NotificationService notificationService = NotificationService();
   EasyLoading.show(status: "Please Wait ");
   if (user != null) {
     try {
@@ -51,34 +55,77 @@ void placeOrder({
           customerAddress: customerAddress,
           customerDeviceToken: customerDeviceToken,
         );
-        for(var x = 0; x < documents.length; x++){
-          await FirebaseFirestore.instance.collection('orders').doc(user.uid).set({
-            'uId':user.uid,
-            'customerName':customerName,
-            'customerPhone':customerPhone,
-            'customerAddress':customerAddress,
-            'customerDeviceToken':customerDeviceToken,
-            'orderStatus':false,
-            'createdAt':DateTime.now(),
-
-          });
+        for (var x = 0; x < documents.length; x++) {
+          await FirebaseFirestore.instance
+              .collection('orders')
+              .doc(user.uid)
+              .set({
+                'uId': user.uid,
+                'customerName': customerName,
+                'customerPhone': customerPhone,
+                'customerAddress': customerAddress,
+                'customerDeviceToken': customerDeviceToken,
+                'orderStatus': false,
+                'createdAt': DateTime.now(),
+              });
           // upload order
-        await  FirebaseFirestore.instance.collection('orders').doc(user.uid).collection('confirmOrders').doc(orderId).set(orderModel.toMap());
+          await FirebaseFirestore.instance
+              .collection('orders')
+              .doc(user.uid)
+              .collection('confirmOrders')
+              .doc(orderId)
+              .set(orderModel.toMap());
 
           // delete cart productData
-         await FirebaseFirestore.instance.collection('cart').doc(user.uid).collection('cartOrders').doc(orderModel.productId.toString()).delete().then((value){
-          print('delete cart product $orderModel.productId.toString()');
-         });
+          await FirebaseFirestore.instance
+              .collection('cart')
+              .doc(user.uid)
+              .collection('cartOrders')
+              .doc(orderModel.productId.toString())
+              .delete()
+              .then((value) {
+                print('delete cart product $orderModel.productId.toString()');
+              });
         }
+        // save notification
+
+        await FirebaseFirestore.instance
+            .collection('notification')
+            .doc(user.uid)
+            .collection('notifications')
+            .doc()
+            .set({
+              'title':
+                  'Order Successfully placed ${orderModel.productId.toString()}',
+              'body': orderModel.productDescription,
+              'isSeen': false,
+              'createdAt': DateTime.now(),
+              'image': orderModel.productImages,
+              'fullPrice': orderModel.fullPrice,
+              'salePrice': orderModel.salePrice,
+              'isSale': orderModel.isSale,
+              'productId': orderModel.productId,
+            });
       }
-      print("order confirmed");
-      Get.snackbar("Oder confirmed","Thank you for your order",
-      backgroundColor: AppConstants.appSecondaryColour,
-      colorText: Colors.white,
-      duration:  Duration(seconds: 3),
+      EasyLoading.show(status: "Sending Notification");
+      await SendNotificationService.sendNotificationUsingApi(
+        token:
+            "cl3IwP9cTkCSHk31yOgVYJ:APA91bEG5VW7eVxEP5XDxyfDcheuiQPfa0EOZBggf-0fHDj9091iAO4KeTIF8F0j3TY8Jy4lWc8M53zmxbfC-EQG6XfccKp2ArFZpaUCNOqZ1cqG-4nZa7E",
+        title: " Order Successfully placed",
+        body: "notofication body",
+        data: {"Screen": "notification"},
       );
       EasyLoading.dismiss();
-      Get.offAll(()=>MainScreen());
+      print("order confirmed");
+      Get.snackbar(
+        "Oder confirmed",
+        "Thank you for your order",
+        backgroundColor: AppConstants.appSecondaryColour,
+        colorText: Colors.white,
+        duration: Duration(seconds: 3),
+      );
+      EasyLoading.dismiss();
+      Get.offAll(() => MainScreen());
     } catch (e) {
       print("Error $e");
     }
